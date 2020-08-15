@@ -1,0 +1,15 @@
+# security
+.env
+
+# glitch development
+.glitch-assets
+.glitch.json
+__pycache__/
+.nano/
+.profile
+.local/
+node_modules
+.data/
+.bash_history
+views
+
