@@ -1,6 +1,8 @@
 # Python Facebook messenger webhook with FastAPI on Glitch
 
-This webhook can be accessed on [Glitch](https://glitch.com/~wit-ai-pywebhook) and can be re-used ("remixed") to start a new project.
+![Alt Text](https://dev-to-uploads.s3.amazonaws.com/i/zbu4maxpcvm05rs7zfep.jpg)
+
+This webhook can be accessed on [Glitch](https://glitch.com/~wit-ai-pywebhook) and re-used ("remixed") to start a new project.
 
 ## Demo
 
@@ -18,12 +20,12 @@ Also check out Scott's [introduction video](https://bit.ly/310kdfG) on setting u
 
 ## API Gateway features
 
-- **GET verification** to verify a received _challenge_
+- **GET verification** of a received _challenge_
 - **POST message reponse** after validating the signature _X-Hub-Signature_ of the received message
 
 # Verify the Webhook
 
-The webhook will return variable challenge as required by [Facebook's instructions](https://developers.facebook.com/docs/messenger-platform/webhook) to set up a webhook. Required to add the webhook in your Messenger settings for each App, which you are access on Facebook Developers.
+The webhook will return the received variable "challenge" as required by [Facebook's instructions](https://developers.facebook.com/docs/messenger-platform/webhook) to set up a webhook. You will have to add the webhook in your Messenger settings for each App, which you can access on [Facebook Developers](https://developers.facebook.com/).
 
 ![Added webhook](https://cdn.glitch.com/529fa55b-87a8-4024-9f8a-84d263c206b3%2Fappsettings.png?v=1597508804453)
 
@@ -33,7 +35,7 @@ After glueing your app together with a facebook page and this webhook you will b
 
 ## Wit.ai Hackathon 3 submission
 
-This webhook will be used as a contribution for the 2020 Facebook Hackathon Series, Hackathon 3 with the submission deadline as of _7 September 2020_. This contribution aims to tickle some strategic points out of the judges and particularly encourages all the smart data scientists out there to focus on their algorithmic models to make a case.
+This webhook will be used as a contribution for the 2020 Facebook Hackathon Series, Hackathon 3 with the submission deadline as of _7 September 2020_. This contribution aims to tickle some strategic points out of the judges and particularly encourages all the smart data scientists out there to focus on their algorithmic models to make a compelling case for a friendly, clever and helpful chatbot.
 
 ## Pull Requests, Issues, Comments
 
@@ -44,3 +46,5 @@ ToDo list:
 - Refactored [dependency](https://fastapi.tiangolo.com/tutorial/dependencies/) to check signature
 - Util function to package outgoing message
 - Full testing coverage with test client
+- Add response time to logs
+- Explain code line by line in Readme
