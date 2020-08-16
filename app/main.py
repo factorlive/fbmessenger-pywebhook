@@ -68,7 +68,7 @@ async def trigger_response(request: Request) -> None:
     signature = request.headers["x-hub-signature"][5:]
     if not hmac.compare_digest(expected_signature, signature):
         raise HTTPException(status_code=403, detail="Message not authenticated.")
-    logger.info(pformat(data, indent=1, depth=3))
+    logger.info(pformat(data, indent=1, depth=7))
     try:
         message = data["entry"][0]["messaging"][0]["message"]
         sender_id = data["entry"][0]["messaging"][0]["sender"]["id"]
