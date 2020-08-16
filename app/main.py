@@ -15,8 +15,11 @@ app = FastAPI()
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("webhook")
 
-@app.get('/song'):
-async def()
+@app.get('/get_song'):
+async def():
+    data = {
+        
+    }
 
 @app.get("/webhook", response_class=PlainTextResponse)
 async def verify_token(
