@@ -69,11 +69,17 @@ async def trigger_response(request: Request) -> None:
     if not hmac.compare_digest(expected_signature, signature):
         raise HTTPException(status_code=403, detail="Message not authenticated.")
     logger.info(pformat(data, indent=1, depth=7))
-    msg = data["entry"][0]["messaging"][0]
-    msg_meta = list(msg)
-    logger.info(f'check messenger {msg_meta}')
-    if 'message' in msg_meta:
-        logger.info(f'check message {pformat(msg["message"])}')
+    messenger = data["entry"][0]["messaging"][0]
+    messenger_meta = list(messenger)
+    logger.info(f'check messenger {messenger_meta}')
+    if 'message' in messenger_meta:
+        message_meta = list(messenger["message"])
+        logger.info(f'check message meta {message_meta}')
+        if 'attachments' in message_meta:
+            r = requests.get()
+            logger.info('this is an attachment')
+        logger.info(f'check message {pformat(messenger["message"])}')
+
     try:
         message = data["entry"][0]["messaging"][0]["message"]
         sender_id = data["entry"][0]["messaging"][0]["sender"]["id"]
