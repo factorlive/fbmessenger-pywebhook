@@ -8,7 +8,7 @@ import hmac
 from typing import Optional
 from fastapi import FastAPI, Query, HTTPException, Request
 from fastapi.responses import PlainTextResponse
-from song_handler
+from app.song_handler import song
 
 #TODO remove
 from pprint import pformat
@@ -77,8 +77,9 @@ async def trigger_response(request: Request) -> None:
         message_meta = list(message)
         if 'attachments' in message_meta:
             if message["attachments"][0]["type"] == 'audio':
-                
-                logger.info(message["attachments"][0]["payload"]["url"])
+                audio_url = message["attachments"][0]["payload"]["url"]
+                song.log_song(audio_url)
+                logger.info(audio_url)
             logger.info('this is an attachment')
         logger.info(f'check message {pformat(messenger["message"])}')
 

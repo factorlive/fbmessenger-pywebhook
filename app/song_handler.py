@@ -1,15 +1,13 @@
 import requests
-
+import logging
 
 # Logging toolbox 🔊
 #TODO clean up logs
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("song")
 
-class Song(url):
-    def log_song(url):
+class Song():
+    def log_song(self, url):
         logger.info(url)
 
-
-
-song = song(url)
+song = Song()
