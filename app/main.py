@@ -22,7 +22,7 @@ async def check_queue():
     }
     pass
 
-@app.get("/webhook", response_class=PlainTextResponse)
+@app.get("/webhook")
 async def verify_token(
     verify_token: Optional[str] = Query(
         None, alias="hub.verify_token", regex="^[A-Za-z1-9-_]*$"
@@ -42,7 +42,7 @@ async def verify_token(
         )
         raise HTTPException(status_code=500, detail="Webhook unavailable.")
     elif verify_token == token and mode == "subscribe":
-        return challenge
+        return PlainTextResponse(f'{challenge}') 
     else:
         raise HTTPException(status_code=403, detail="Token invalid.")
 
