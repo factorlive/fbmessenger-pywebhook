@@ -1,13 +1,20 @@
 import requests
+import logging
+
+# Logging toolbox 🔊
+# TODO clean up logs
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger("fbme")
 
 
-class fbme(object):
-    def is_downloadable(url):
+class Messenger(object):
+    def audio_file(self, url):
         h = requests.head(url, allow_redirects=True)
         header = h.headers
-        content_type = header.get('content-type')
-        if 'text' in content_type.lower():
-            return False
-        if 'html' in content_type.lower():
-            return False
-        return True
+        audio_file = header.get('filename')
+        if 'mp4' in audio_file.split('.'):
+            return audio_file
+        return False
+
+
+fb = Messenger()

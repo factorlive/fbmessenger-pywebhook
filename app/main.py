@@ -9,6 +9,8 @@ from typing import Optional
 from fastapi import FastAPI, Query, HTTPException, Request
 from fastapi.responses import PlainTextResponse
 from app.song_handler import song
+from app.fbme import fb
+
 
 #TODO remove
 from pprint import pformat
@@ -78,6 +80,7 @@ async def trigger_response(request: Request) -> None:
         if 'attachments' in message_meta:
             if message["attachments"][0]["type"] == 'audio':
                 audio_url = message["attachments"][0]["payload"]["url"]
+                logger.info(fb.audio_file(audio_url))
                 song.log_song(audio_url)
                 logger.info(audio_url)
             logger.info('this is an attachment')
