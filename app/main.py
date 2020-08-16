@@ -3,11 +3,12 @@ import json
 import logging
 import uvicorn
 import requests
+import hashlib
+import hmac
 from typing import Optional
 from fastapi import FastAPI, Query, HTTPException, Request
 from fastapi.responses import PlainTextResponse
-import hashlib
-import hmac
+from song_handler
 
 #TODO remove
 from pprint import pformat
@@ -76,6 +77,7 @@ async def trigger_response(request: Request) -> None:
         message_meta = list(message)
         if 'attachments' in message_meta:
             if message["attachments"][0]["type"] == 'audio':
+                
                 logger.info(message["attachments"][0]["payload"]["url"])
             logger.info('this is an attachment')
         logger.info(f'check message {pformat(messenger["message"])}')
