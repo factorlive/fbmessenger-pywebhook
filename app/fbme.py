@@ -10,22 +10,26 @@ logger = logging.getLogger("fbme")
 
 
 class Messenger(object):
-    def audio_file(self, url):
-        h = requests.head(url, allow_redirects=True)
-        header = h.headers
+    def get_header(self, url):
+        return requests.head(url, allow_redirects=True)
+
+    def get_file(self, url):
+        return requests.get(url)
+        
+    def audio_file(self, request):
+        header = request.headers
         logger.info(header)
         audio_file = header.get('Content-Disposition')
         if 'mp4' in audio_file.split('.'):
             return audio_file.split('=')[1]
         return False
 
-    def save_audio(self, url, audio_file):
-        r = requests.get(url)
+    def save_audio(self, request, filename):
         temp_folder = Path(getenv('TEMP_FOLDER'))
-        temp_file = temp_folder / audio_file
+        temp_file = temp_folder / filename
         with open(temp_file, 'wb') as f:
-            f.write(r.content)
-        return r.status_code
+            f.write(request.content)
+        return request.status_code
 
 
 fb = Messenger()
