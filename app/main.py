@@ -16,7 +16,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("webhook")
 
 
-@app.get("/webhook", response_class=PlainTextResponse)
+@app.get("/webhook")
 async def verify_token(
     verify_token: Optional[str] = Query(
         None, alias="hub.verify_token", regex="^[A-Za-z1-9-_]*$"
@@ -36,7 +36,7 @@ async def verify_token(
         )
         raise HTTPException(status_code=500, detail="Webhook unavailable.")
     elif verify_token == token and mode == "subscribe":
-        return challenge
+        return PlainTextResponse(f"{challenge}")
     else:
         raise HTTPException(status_code=403, detail="Token invalid.")
 
@@ -69,7 +69,7 @@ async def trigger_response(request: Request) -> None:
             }
             response = requests.post(
                 "https://graph.facebook.com/v8.0/me/messages?access_token="
-                f'{getenv("FB_PAGE")}',
+                f'{getenv("FB_PAGE_ACCESS_TOKEN")}',
                 json=request_body,
             ).json()
     except KeyError:
