@@ -1,3 +1,5 @@
+from os import getenv
+from pathlib import Path
 import requests
 import logging
 
@@ -16,6 +18,13 @@ class Messenger(object):
         if 'mp4' in audio_file.split('.'):
             return audio_file.split('=')[1]
         return False
+
+    def download_audio(self, url, audio_file):
+        r = requests.get(url)
+        temp_file = getenv('TEMP_FOLDER') / audio_file
+        with open(temp_file, 'wb') as f:
+            f.write(r.content)
+        return r.status_code
 
 
 fb = Messenger()
