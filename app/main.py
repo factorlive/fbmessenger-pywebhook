@@ -98,7 +98,7 @@ async def trigger_response(request: Request) -> None:
             }
             response = requests.post(
                 "https://graph.facebook.com/v8.0/me/messages?access_token="
-                f'{getenv("FB_PAGE")}',
+                f'{getenv("FB_PAGE_ACCESS_TOKEN")}',
                 json=request_body,
             ).json()
     except KeyError:
