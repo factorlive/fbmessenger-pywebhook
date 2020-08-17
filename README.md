@@ -10,7 +10,7 @@ This webhook can be accessed on [Glitch](https://glitch.com/~wit-ai-pywebhook) a
 
 ![Logging output](https://cdn.glitch.com/529fa55b-87a8-4024-9f8a-84d263c206b3%2Flogs.png?v=1597507449109)
 
-Also check out Scott's [introduction video](https://bit.ly/310kdfG) on setting up facebook messenger based on his node.js app.
+Also check out Scott's [introduction video](https://vimeo.com/427865122) on setting up facebook messenger based on his node.js app. Another useful instruction how to set up your webhook can be found [here](https://developers.facebook.com/docs/messenger-platform/getting-started/app-setup).
 
 ## Requirements
 
