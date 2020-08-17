@@ -83,7 +83,7 @@ async def trigger_response(request: Request) -> None:
                 header = fb.get_header(audio_url)
                 mp4_name = fb.audio_file(header)
                 logger.info(mp4_name)
-                logger.info(fb.save_audio(audio_url, mp4_name))
+                # logger.info(fb.save_audio(audio_url, mp4_name))
                 song.log_song(audio_url)
                 logger.info(audio_url)
             logger.info('this is an attachment')
