@@ -1,6 +1,6 @@
 {
   "install": "pip3 install --user --no-cache-dir -r requirements.txt",
-  "start": "PYTHONUNBUFFERED=true uvicorn app.main:app --reload",
+  "start": "PYTHONUNBUFFERED=true python3 -m pytest --cov=app --cov-report term-missing app/tests && uvicorn app.main:app --reload",
   "watch": {
     "ignore": ["\\.pyc$"],
     "install": {
