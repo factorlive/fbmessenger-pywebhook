@@ -19,9 +19,10 @@ class Messenger(object):
             return audio_file.split('=')[1]
         return False
 
-    def download_audio(self, url, audio_file):
+    def save_audio(self, url, audio_file):
         r = requests.get(url)
-        temp_file = getenv('TEMP_FOLDER') / audio_file
+        temp_folder = Path(getenv('TEMP_FOLDER'))
+        temp_file = temp_folder / audio_file
         with open(temp_file, 'wb') as f:
             f.write(r.content)
         return r.status_code
