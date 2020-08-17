@@ -1,0 +1,18 @@
+{
+  "Last-Modified": "Mon, 17 Aug 2020 22:36:01 GMT",
+  "x-authenticated-common-name": "svc:proxygen",
+  "x-authenticated-identities": "SERVICE_IDENTITY:proxygen-origin,MACHINE:twtraffic0569.10.atn6.facebook.com,MACHINE_TIER:twtraffic,SERVICE_IDENTITY:proxygen",
+  "Content-Type": "video/mp4",
+  "x-haystack-needlechecksum": "2519054850",
+  "x-needle-checksum": "3704783038",
+  "x-fb-config-version-olb-prod": "888",
+  "Content-Disposition": "attachment; filename=audioclip-1597703761000-1904.mp4",
+  "Cache-Control": "max-age=1209600, no-transform",
+  "X-FB-TRIP-ID": "1904183273",
+  "X-FB-Config-Version-ELB-PROD": "feea6a2eeb8440c7a3254a84426a537f",
+  "Date": "Mon, 17 Aug 2020 22:36:03 GMT",
+  "X-FB-Edge-Debug": "PxxKQD2t-hHIbesPyq39pyrf6OSwSkTPlu-uiIrU9YawBYvTiZ1TaDdwj30i72TEGSq_SU9eCW7J0MGpEKNbLQ",
+  "Alt-Svc": "h3-29=\":443\"; ma=3600,h3-27=\":443\"; ma=3600",
+  "Connection": "keep-alive",
+  "Content-Length": "71829"
+}
