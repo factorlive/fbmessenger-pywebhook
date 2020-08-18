@@ -1,6 +1,7 @@
 from typing import Optional
 from os import getenv, remove
 from pathlib import Path
+import requests
 import logging
 
 # Logging toolbox 🔊
@@ -8,10 +9,23 @@ import logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+FBME_API_HOST=getenv('FBME_API_HOST', 'fbme_api_host_missing')
+FBME_API_VERSION=getenv('FBME_API_VERSION', 'fbme_api_version_missing')
+
 
 class Messenger(object):
-    def message(self, recipient: int, message: ):
-        if 
+    def message(self, recipient: int, message: str) -> dict:
+        message_body = {
+            "recipient": {"id": recipient},
+            "message": {"text": message}
+        }
+        method = FBME_API_HOST + '/' + FBME_API_VERSION + '/me/messages'
+        access_token = f''
+        response = requests.post(
+            method + f',
+            json=message_body,
+        ).json()
+        return response
 
     def check_header(self, header: dict) -> Optional[str]:
         audio_file = header.get('Content-Disposition', 'no_audio_file')
