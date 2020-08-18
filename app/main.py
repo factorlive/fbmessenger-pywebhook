@@ -85,9 +85,9 @@ async def trigger_response(request: Request) -> None:
                 if audioclip_name:
                     fb.save_audio(read_attachment.content, audioclip_name)
                     audio_sender = messenger["sender"]["id"]
-                    logger.info(f'recipient id {audio_sender}')
-                    respond = fb.message(audio_sender, "We will suggest songs soon.")
-                    logger.info(respond)
+                    response = fb.message(audio_sender, "We will suggest songs soon.")
+                    logger.debug(f'Response after audio was saved: {response}')
+                    fb.remove_audio(audioclip_name)
                 # logger.info(fb.save_audio(audio_url, mp4_name))
                 song.log_song(audio_url)
                 logger.info(audio_url)

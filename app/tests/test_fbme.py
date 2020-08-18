@@ -18,7 +18,7 @@ def test_message_fbme(requests_mock: Mocker, post_msg_response: dict) -> None:
     access_token = f'?access_token={getenv("FB_PAGE_ACCESS_TOKEN")}'
     requests_mock.post(method + access_token, json=post_msg_response)
     simulate_response = fb.message(0, 'test')
-    assert simulate_response["recipient_id"] == "0"
+    assert simulate_response['recipient_id'] == '0'
 
 
 def test_check_header_fbme(header_w_attach: dict) -> None:

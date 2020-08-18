@@ -16,8 +16,8 @@ FBME_API_VERSION = getenv('FBME_API_VERSION', 'fbme_api_version_missing')
 class Messenger(object):
     def message(self, recipient: int, message: str) -> dict:
         message_body = {
-            "recipient": {"id": recipient},
-            "message": {"text": message}
+            'recipient': {'id': recipient},
+            'message': {'text': message}
         }
         method = FBME_API_HOST + '/' + FBME_API_VERSION + '/me/messages'
         access_token = f'?access_token={getenv("FB_PAGE_ACCESS_TOKEN")}'
