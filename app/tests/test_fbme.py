@@ -10,17 +10,17 @@ logger = logging.getLogger(__name__)
 # mocked_request = requests.get('http://fb.me')
 
 
-def test_check_header_fbme(header_w_attach) -> None:
+def test_check_header_fbme(header_w_attach: dict) -> None:
     test_filename = header_w_attach['Content-Disposition'].split('=')[1]
     assert test_filename == fb.check_header(header_w_attach)
 
 
-def test_check_header_fbme_wrong_filetype(header_w_attach) -> None:
+def test_check_header_fbme_wrong_filetype(header_w_attach: dict) -> None:
     header_w_attach['Content-Disposition'] = 'other-file.wav'
     assert fb.check_header(header_w_attach) is None
 
 
-def test_check_header_fbme_wrong_filetype(audioclip) -> None:
+def test_save_audio_fbme(audioclip: bytes) -> None:
     # header_w_attach['Content-Disposition'] = 'other-file.wav'
     # assert fb.check_header(header_w_attach) is None
-    
+    pass
