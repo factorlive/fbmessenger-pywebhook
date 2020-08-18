@@ -1,5 +1,6 @@
 from os import getenv, listdir
 import logging
+import requests_mock
 from app.main import fb
 
 
@@ -8,10 +9,16 @@ logger = logging.getLogger(__name__)
 
 # requests_mock.get('http://fb.me', json=header)
 # mocked_request = requests.get('http://fb.me')
+FBME_API_HOST = getenv('FBME_API_HOST', 'fbme_api_host_missing')
+FBME_API_VERSION = getenv('FBME_API_VERSION', 'fbme_api_version_missing')
+
 
 def test_message_fbme() -> None:
-    test_filename = header_w_attach['Content-Disposition'].split('=')[1]
-    assert test_filename == fb.check_header(header_w_attach)
+    method = FBME_API_HOST + '/' + FBME_API_VERSION + '/me/messages'
+    access_token = f'?access_token={getenv("FB_PAGE_ACCESS_TOKEN")}'
+    requests_mock.get(method + access_token, json={})
+
+    pass
 
 
 def test_check_header_fbme(header_w_attach: dict) -> None:

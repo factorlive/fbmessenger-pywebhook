@@ -3,8 +3,15 @@ from os import getenv
 import json
 from pathlib import Path
 
-fixtures = Path(getenv('FIXTURES'))
+fixtures = Path(getenv('FIXTURES', default='missing_fixtures_folder'))
 
+
+@pytest.fixture(scope="module")
+def response() -> dict:
+    h = fixtures / 'response.json'
+    with open(h, 'r') as f:
+        header = json.load(f)
+    return header
 
 @pytest.fixture(scope="module")
 def header_w_attach() -> dict:
@@ -25,4 +32,3 @@ def audioclip() -> bytes:
 @pytest.fixture(scope="module")
 def audioclip_name() -> str:
     return 'audioclip.mp4'
-    

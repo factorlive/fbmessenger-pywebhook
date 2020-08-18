@@ -9,8 +9,8 @@ import logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-FBME_API_HOST=getenv('FBME_API_HOST', 'fbme_api_host_missing')
-FBME_API_VERSION=getenv('FBME_API_VERSION', 'fbme_api_version_missing')
+FBME_API_HOST = getenv('FBME_API_HOST', 'fbme_api_host_missing')
+FBME_API_VERSION = getenv('FBME_API_VERSION', 'fbme_api_version_missing')
 
 
 class Messenger(object):
