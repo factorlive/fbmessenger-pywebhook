@@ -16,12 +16,12 @@ class Messenger(object):
             return None
         return audio_file.split('=')[1]
 
-    def save_audio(self, request, filename):
+    def save_audio(self, audioclip, filename):
         temp_folder = Path(getenv('TEMP_FOLDER'))
         temp_file = temp_folder / filename
         with open(temp_file, 'wb') as f:
-            f.write(request.content)
-        return request.status_code
+            f.write(audioclip)
+        return 'save audio says file saved'
 
 
 fb = Messenger()
