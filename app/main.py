@@ -72,7 +72,7 @@ async def trigger_response(request: Request) -> None:
     if not hmac.compare_digest(expected_signature, signature):
         raise HTTPException(status_code=403, detail="Message not authenticated.")
     logger.info(pformat(data, indent=1, depth=10))
-    messenger = data["entry"][0]["messaging"][0]
+    messenger = data['entry'][0]['messaging'][0]
     messenger_meta = list(messenger)
     if 'message' in messenger_meta:
         sender = messenger["sender"]["id"]
@@ -80,40 +80,26 @@ async def trigger_response(request: Request) -> None:
         message_meta = list(message)
         if 'attachments' in message_meta:
             if message["attachments"][0]["type"] == 'audio':
-                audio_url = message["attachments"][0]["payload"]["url"]
+                audio_url = message['attachments'][0]['payload']['url']
                 read_attachment = requests.get(audio_url)
                 audioclip_name = fb.check_header(dict(read_attachment.headers))
                 if audioclip_name:
                     fb.save_audio(read_attachment.content, audioclip_name)
-                    response = fb.message(sender, "We will suggest songs soon.")
+                    response = fb.message(sender, 'We will suggest songs soon.')
+                    logger.info(f'Message sent to {sender}. ✅')
                     logger.debug(f'Response after audio was saved: {response}')
                     fb.remove_audio(audioclip_name)
                 # logger.info(fb.save_audio(audio_url, mp4_name))
                 song.log_song(audio_url)
                 logger.info(audio_url)
         else:
-            fb.message(sender, 'Sing or hum a song and I will guess.')
+            fb.message(sender, 'Sing or hum a song and I will take a guess.')
+            logger.info(f'Message sent to {sender}. ✅')
             logger.info('this is an attachment')
         logger.info(f'check message {pformat(messenger["message"])}')
 
-    try:
-        message = data["entry"][0]["messaging"][0]["message"]
-        sender_id = data["entry"][0]["messaging"][0]["sender"]["id"]
-        if message["text"]:
-            request_body = {
-                "recipient": {"id": sender_id},
-                "message": {"text": "Your Webhook works! Now get started!"},
-            }
-            response = requests.post(
-                "https://graph.facebook.com/v8.0/me/messages?access_token="
-                f'{getenv("FB_PAGE_ACCESS_TOKEN")}',
-                json=request_body,
-            ).json()
-    except KeyError:
-        logger.info("Message sent and received by recipient. ✅")
-        pass
     return None
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     uvicorn.run(app, host="0.0.0.0", port=8000)
