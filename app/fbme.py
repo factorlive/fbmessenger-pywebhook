@@ -10,7 +10,8 @@ logger = logging.getLogger(__name__)
 
 
 class Messenger(object):
-    def message(self, params: dict):
+    def message(self, recipient: int, message: ):
+        if 
 
     def check_header(self, header: dict) -> Optional[str]:
         audio_file = header.get('Content-Disposition', 'no_audio_file')
