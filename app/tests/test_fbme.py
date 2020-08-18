@@ -1,3 +1,4 @@
+from os import getenv
 import logging
 from pprint import pformat
 from app.main import fb
@@ -18,9 +19,16 @@ def test_check_header_fbme(header_w_attach: dict) -> None:
 def test_check_header_fbme_wrong_filetype(header_w_attach: dict) -> None:
     header_w_attach['Content-Disposition'] = 'other-file.wav'
     assert fb.check_header(header_w_attach) is None
+    header_w_attach['Content-Disposition'] = 'no-extension-file'
+    assert fb.check_header(header_w_attach) is None
+    header_w_attach['Content-Disposition'] = 'special-chars-?>#@'
+    assert fb.check_header(header_w_attach) is None
 
 
 def test_save_audio_fbme(audioclip: bytes) -> None:
     # header_w_attach['Content-Disposition'] = 'other-file.wav'
     # assert fb.check_header(header_w_attach) is None
+    temp_path = getenv('')
+
+
     pass
