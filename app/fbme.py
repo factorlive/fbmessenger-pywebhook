@@ -21,7 +21,7 @@ class Messenger(object):
         audio_file = header.get('Content-Disposition')
         if 'mp4' in audio_file.split('.'):
             return audio_file.split('=')[1]
-        return False
+        return None
 
     def save_audio(self, request, filename):
         temp_folder = Path(getenv('TEMP_FOLDER'))
