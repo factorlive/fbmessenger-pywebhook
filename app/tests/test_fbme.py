@@ -27,5 +27,13 @@ def test_check_header_fbme():
     with open(h, 'r') as f:
         header = json.load(f)
     # logger.info(fb.check_header(mocked_request))
-    # logger.info(pformat(header, depth=2)
-    assert header == header
+    logger.info(pformat(header, depth=2))
+    test_filename = header['Content-Disposition'].split('=')[1]
+    assert test_filename == fb.check_header(header)
+    header['Content-Disposition'] = 'other-file.wav'
+    test_filename = header['Content-Disposition'].split('=')[1]
+    filename = fb.check_header(header)
+    logger.info(test_filename)
+    logger.info(filename)
+    assert test_filename != fb.check_header(header)
+
