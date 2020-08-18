@@ -25,5 +25,5 @@ def test_check_header_fbme(requests_mock):
         header = json.load(f)
     requests_mock.get('http://fb.me', json=header)
     mocked_request = requests.get('http://fb.me')
-
-    assert header == 
+    logger.info(mocked_request.headers)
+    assert header == header
