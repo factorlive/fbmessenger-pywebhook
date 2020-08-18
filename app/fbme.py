@@ -6,7 +6,7 @@ import logging
 # Logging toolbox 🔊
 # TODO clean up logs
 logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger("fbme")
+logger = logging.getLogger(__name__)
 
 
 class Messenger(object):

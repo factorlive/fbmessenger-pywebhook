@@ -20,7 +20,7 @@ logger = logging.getLogger(__name__)
 #     assert header 
 
 
-def test_audio_file_fbme():
+def test_audio_file_fbme(requests_mock):
     h = fixtures / 'header_w_attach.json'
     with open(h, 'r') as f:
         header = json.load(f)
