@@ -1,4 +1,6 @@
 import json
+import requests
+import requests_mock
 from os import getenv
 from pathlib import Path
 from app.fbme import fb
