@@ -1,4 +1,4 @@
-from os import getenv
+from os import listdir
 import logging
 from pprint import pformat
 from app.main import fb
@@ -28,7 +28,11 @@ def test_check_header_fbme_wrong_filetype(header_w_attach: dict) -> None:
 def test_save_audio_fbme(audioclip: bytes) -> None:
     # header_w_attach['Content-Disposition'] = 'other-file.wav'
     # assert fb.check_header(header_w_attach) is None
-    temp_path = getenv('')
+    fb.save_audio(audioclip, 'audioclip.mp4')
+    temp_folder = getenv('TEMP_FOLDER')
+    temp_index = listdir(temp_folder).index('audioclip.mp4')
+    
+
 
 
     pass
