@@ -1,4 +1,4 @@
-from typing import Union
+from typing import Optional
 from os import getenv
 from pathlib import Path
 import logging
@@ -10,11 +10,13 @@ logger = logging.getLogger(__name__)
 
 
 class Messenger(object):
-    def check_header(self, header: dict) -> str:
+    def check_header(self, header: dict) -> Optional[str]:
         logger.info(header)
         audio_file = header.get('Content-Disposition')
-        if 'mp4' in audio_file.split('.'):
-            return audio_file.split('=')[1]
+        if 'mp4' not in audio_file.split('.'):
+            return None
+        filename = audio_file.split('=')[1] 
+        return filename
 
     def save_audio(self, request, filename):
         temp_folder = Path(getenv('TEMP_FOLDER'))
