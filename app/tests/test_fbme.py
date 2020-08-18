@@ -31,9 +31,9 @@ def test_check_header_fbme():
     test_filename = header['Content-Disposition'].split('=')[1]
     assert test_filename == fb.check_header(header)
     header['Content-Disposition'] = 'other-file.wav'
-    test_filename = header['Content-Disposition'].split('=')[1]
+    test_filename = header['Content-Disposition']
     filename = fb.check_header(header)
     logger.info(test_filename)
     logger.info(filename)
-    assert test_filename != fb.check_header(header)
+    assert False != fb.check_header(header)
 
