@@ -1,6 +1,5 @@
-from os import getenv,listdir, remove
+from os import getenv, listdir
 import logging
-from pprint import pformat
 from app.main import fb
 
 
@@ -29,7 +28,7 @@ def test_save_audio_fbme(audioclip: bytes, audioclip_name: str) -> None:
     fb.save_audio(audioclip, audioclip_name)
     ls_temp_folder = listdir(getenv('TEMP_FOLDER'))
     assert 'audioclip.mp4' in ls_temp_folder
-    
+
 
 def test_remove_audio_fbme(audioclip_name: str) -> None:
     fb.remove_audio(audioclip_name)
