@@ -83,7 +83,10 @@ async def trigger_response(request: Request) -> None:
                 read_attachment = requests.get(audio_url)
                 audioclip_name = fb.check_header(read_attachment.headers)
                 if audioclip_name:
-                    saving = fb.save_audio(read_attachment.content, audioclip_name)
+                    fb.save_audio(read_attachment.content, audioclip_name)
+                    audio_sender = messenger["sender"]["id"]
+                    respond = fb.message(audio_sender, "We will suggest songs soon.")
+                    logger.info(respond)
                     logger.error(f'{saving} An audio file could not be saved.')
                 # logger.info(fb.save_audio(audio_url, mp4_name))
                 song.log_song(audio_url)
