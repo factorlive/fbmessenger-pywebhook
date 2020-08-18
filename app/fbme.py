@@ -1,6 +1,6 @@
+from typing import Union
 from os import getenv
 from pathlib import Path
-import requests
 import logging
 
 # Logging toolbox 🔊
@@ -10,13 +10,7 @@ logger = logging.getLogger(__name__)
 
 
 class Messenger(object):
-    def get_header(self, url):
-        return requests.head(url, allow_redirects=True)
-
-    def get_file(self, url):
-        return requests.get(url)
-        
-    def check_header(self, header):
+    def check_header(self, header) -> Union[str, None]:
         logger.info(header)
         audio_file = header.get('Content-Disposition')
         if 'mp4' in audio_file.split('.'):
