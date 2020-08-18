@@ -11,12 +11,10 @@ logger = logging.getLogger(__name__)
 
 class Messenger(object):
     def check_header(self, header: dict) -> Optional[str]:
-        logger.info(header)
-        audio_file = header.get('Content-Disposition')
+        audio_file = str(header.get('Content-Disposition'))
         if 'mp4' not in audio_file.split('.'):
             return None
-        filename = audio_file.split('=')[1] 
-        return filename
+        return audio_file.split('=')[1]
 
     def save_audio(self, request, filename):
         temp_folder = Path(getenv('TEMP_FOLDER'))
