@@ -35,5 +35,5 @@ def test_check_header_fbme():
     filename = fb.check_header(header)
     logger.info(test_filename)
     logger.info(filename)
-    assert False != fb.check_header(header)
+    assert False == fb.check_header(header)
 
