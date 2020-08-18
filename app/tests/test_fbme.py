@@ -13,13 +13,12 @@ FBME_API_HOST = getenv('FBME_API_HOST', 'fbme_api_host_missing')
 FBME_API_VERSION = getenv('FBME_API_VERSION', 'fbme_api_version_missing')
 
 
-def test_message_fbme(requests_mock: Mocker, response: dict) -> None:
+def test_message_fbme(requests_mock: Mocker, post_msg_response: dict) -> None:
     method = FBME_API_HOST + '/' + FBME_API_VERSION + '/me/messages'
     access_token = f'?access_token={getenv("FB_PAGE_ACCESS_TOKEN")}'
-    requests_mock.post(method + access_token, json=response)
-    simulate_response = fb.message(123, 'test')
-    logger.info(simulate_response)
-    pass
+    requests_mock.post(method + access_token, json=post_msg_response)
+    simulate_response = fb.message(0, 'test')
+    assert simulate_response["recipient_id"] == "0"
 
 
 def test_check_header_fbme(header_w_attach: dict) -> None:

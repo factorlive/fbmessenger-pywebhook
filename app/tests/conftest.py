@@ -7,8 +7,8 @@ fixtures = Path(getenv('FIXTURES', default='missing_fixtures_folder'))
 
 
 @pytest.fixture(scope="module")
-def response() -> dict:
-    h = fixtures / 'response.json'
+def post_msg_response() -> dict:
+    h = fixtures / 'post_msg_response.json'
     with open(h, 'r') as f:
         header = json.load(f)
     return header
