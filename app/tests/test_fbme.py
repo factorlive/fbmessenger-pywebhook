@@ -1,4 +1,5 @@
 import logging
+from pprint import pformat
 import json
 import requests
 from os import getenv
@@ -17,13 +18,14 @@ logger = logging.getLogger(__name__)
 #         header = json.load(f)
 #     fb.get_header('http://test.com', text=header)
 #     assert header 
+    # requests_mock.get('http://fb.me', json=header)
+    # mocked_request = requests.get('http://fb.me')
 
 
-def test_check_header_fbme(requests_mock):
+def test_check_header_fbme():
     h = fixtures / 'header_w_attach.json'
     with open(h, 'r') as f:
         header = json.load(f)
-    requests_mock.get('http://fb.me', json=header)
-    mocked_request = requests.get('http://fb.me')
-    logger.info(mocked_request.headers)
+    # logger.info(fb.check_header(mocked_request))
+    # logger.info(pformat(header, depth=2)
     assert header == header

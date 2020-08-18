@@ -16,8 +16,7 @@ class Messenger(object):
     def get_file(self, url):
         return requests.get(url)
         
-    def check_header(self, request):
-        header = request.headers
+    def check_header(self, header):
         logger.info(header)
         audio_file = header.get('Content-Disposition')
         if 'mp4' in audio_file.split('.'):
