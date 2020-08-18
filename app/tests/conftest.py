@@ -20,3 +20,9 @@ def audioclip() -> bytes:
     with open(fix, 'rb') as f:
         audio = f.read()
     return audio
+
+
+@pytest.fixture(scope="module")
+def audioclip_name() -> str:
+    return 'audioclip.mp4'
+    

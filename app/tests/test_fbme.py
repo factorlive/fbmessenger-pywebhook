@@ -25,9 +25,13 @@ def test_check_header_fbme_wrong_filetype(header_w_attach: dict) -> None:
     assert fb.check_header(header_w_attach) is None
 
 
-def test_save_audio_fbme(audioclip: bytes) -> None:
-    fb.save_audio(audioclip, 'audioclip.mp4')
+def test_save_audio_fbme(audioclip: bytes, audioclip_name: str) -> None:
+    fb.save_audio(audioclip, audioclip_name)
     ls_temp_folder = listdir(getenv('TEMP_FOLDER'))
     assert 'audioclip.mp4' in ls_temp_folder
     
 
+def test_remove_audio_fbme(audioclip_name: str) -> None:
+    fb.remove_audio(audioclip_name)
+    ls_temp_folder = listdir(getenv('TEMP_FOLDER'))
+    assert 'audioclip.mp4' not in ls_temp_folder

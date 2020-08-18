@@ -1,5 +1,5 @@
 from typing import Optional
-from os import getenv
+from os import getenv, remove
 from pathlib import Path
 import logging
 
@@ -16,18 +16,17 @@ class Messenger(object):
             return None
         return audio_file.split('=')[1]
 
-    def save_audio(self, audioclip, audioclip_name) -> None:
+    def save_audio(self, audioclip: bytes, audioclip_name: str) -> None:
         temp_folder = Path(getenv('TEMP_FOLDER', default='missing_temp_env_path'))
         temp_file = temp_folder / audioclip_name
         with open(temp_file, 'wb') as f:
             f.write(audioclip)
         return None
 
-    def remove_audio(self, audioclip, audioclip_name):
-        temp_folder = Path(getenv('TEMP_FOLDER'))
+    def remove_audio(self, audioclip_name: str) -> None:
+        temp_folder = Path(getenv('TEMP_FOLDER', default='missing_temp_env_path'))
         temp_file = temp_folder / audioclip_name
-        with open(temp_file, 'wb') as f:
-            f.write(audioclip)
-        return 'save audio says file saved'
+        return remove(temp_file)
+
 
 fb = Messenger()
