@@ -1,6 +1,6 @@
 from os import getenv, listdir
 import logging
-import requests_mock
+from requests_mock.mocker import Mocker
 from app.main import fb
 
 
@@ -13,11 +13,12 @@ FBME_API_HOST = getenv('FBME_API_HOST', 'fbme_api_host_missing')
 FBME_API_VERSION = getenv('FBME_API_VERSION', 'fbme_api_version_missing')
 
 
-def test_message_fbme() -> None:
+def test_message_fbme(requests_mock: Mocker, response: dict) -> None:
     method = FBME_API_HOST + '/' + FBME_API_VERSION + '/me/messages'
     access_token = f'?access_token={getenv("FB_PAGE_ACCESS_TOKEN")}'
-    requests_mock.get(method + access_token, json={})
-
+    requests_mock.post(method + access_token, json=response)
+    simulate_response = fb.message(123, 'test')
+    logger.info(simulate_response)
     pass
 
 

@@ -13,6 +13,7 @@ def response() -> dict:
         header = json.load(f)
     return header
 
+
 @pytest.fixture(scope="module")
 def header_w_attach() -> dict:
     h = fixtures / 'header_w_attach.json'
