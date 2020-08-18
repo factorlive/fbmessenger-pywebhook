@@ -18,3 +18,9 @@ def test_check_header_fbme(header_w_attach) -> None:
 def test_check_header_fbme_wrong_filetype(header_w_attach) -> None:
     header_w_attach['Content-Disposition'] = 'other-file.wav'
     assert fb.check_header(header_w_attach) is None
+
+
+def test_check_header_fbme_wrong_filetype(audioclip) -> None:
+    # header_w_attach['Content-Disposition'] = 'other-file.wav'
+    # assert fb.check_header(header_w_attach) is None
+    

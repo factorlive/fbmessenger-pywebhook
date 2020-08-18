@@ -13,9 +13,10 @@ def header_w_attach() -> dict:
         header = json.load(f)
     return header
 
+
 @pytest.fixture(scope="module")
-def audioclip() -> dict:
+def audioclip() -> bytes:
     fix = fixtures / 'audioclip.mp4'
     with open(fix, 'rb') as f:
-        audio = file.read(f)
+        audio = f.read()
     return audio
