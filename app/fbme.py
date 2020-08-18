@@ -16,7 +16,7 @@ class Messenger(object):
     def get_file(self, url):
         return requests.get(url)
         
-    def audio_file(self, request):
+    def check_header(self, request):
         header = request.headers
         logger.info(header)
         audio_file = header.get('Content-Disposition')

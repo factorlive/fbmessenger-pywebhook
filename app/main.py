@@ -81,7 +81,7 @@ async def trigger_response(request: Request) -> None:
             if message["attachments"][0]["type"] == 'audio':
                 audio_url = message["attachments"][0]["payload"]["url"]
                 header = fb.get_header(audio_url)
-                mp4_name = fb.audio_file(header)
+                mp4_name = fb.check_header(header)
                 logger.info(mp4_name)
                 # logger.info(fb.save_audio(audio_url, mp4_name))
                 song.log_song(audio_url)
