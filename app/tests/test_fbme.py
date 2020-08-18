@@ -1,7 +1,6 @@
 import logging
 import json
 import requests
-import requests_mock
 from os import getenv
 from pathlib import Path
 from app.fbme import fb
@@ -25,4 +24,7 @@ def test_audio_file_fbme(requests_mock):
     with open(h, 'r') as f:
         header = json.load(f)
     logger.info(header)
+    requests_mock.get('http://fb.me', json=header)
+    mocked_header = requests.get('http://fb.me')
+    logger.info(mocked_header.text)
     assert 1 == 1
