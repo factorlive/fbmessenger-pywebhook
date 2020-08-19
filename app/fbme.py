@@ -14,6 +14,11 @@ FBME_API_VERSION = getenv('FBME_API_VERSION', 'fbme_api_version_missing')
 
 
 class Messenger(object):
+    def generate_appsecret_proof(self) -> bytes:
+        app_secret = getenv("FB_APP_SECRET", 'missing_secret').encode()
+        
+
+
     def message(self, recipient: int, message: str) -> dict:
         message_body = {
             'recipient': {'id': recipient},
