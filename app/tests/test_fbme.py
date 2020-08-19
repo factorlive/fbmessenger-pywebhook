@@ -14,9 +14,9 @@ FBME_API_VERSION = getenv('FBME_API_VERSION', 'fbme_api_version_missing')
 
 
 def test_message_fbme(requests_mock: Mocker, post_msg_response: dict) -> None:
-    method = FBME_API_HOST + '/' + FBME_API_VERSION + '/me/messages'
-    access_token = f'?access_token={getenv("FB_PAGE_ACCESS_TOKEN")}'
-    requests_mock.post(method + access_token, json=post_msg_response)
+    gateway = FBME_API_HOST + '/' + FBME_API_VERSION + '/me/messages'
+    # access_token = f'?access_token={getenv("FB_PAGE_ACCESS_TOKEN")}'
+    requests_mock.post(gateway + fb.credentials(), json=post_msg_response)
     simulate_response = fb.message(0, 'test')
     assert simulate_response['recipient_id'] == '0'
 
