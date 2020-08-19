@@ -1,4 +1,6 @@
 from typing import Optional
+import hmac
+import hashlib
 from os import getenv, remove
 from pathlib import Path
 import requests
@@ -14,10 +16,11 @@ FBME_API_VERSION = getenv('FBME_API_VERSION', 'fbme_api_version_missing')
 
 
 class Messenger(object):
-    def generate_appsecret_proof(self) -> bytes:
-        app_secret = getenv("FB_APP_SECRET", 'missing_secret').encode()
-        
-
+    def generate_appsecret_proof(self) -> str:
+        app_secret = getenv('FB_APP_SECRET', 'missing_secret').encode()
+        access_token = getenv(
+            'FB_PAGE_ACCESS_TOKEN', 'missing_page_access_token').encode()
+        return hmac.new(app_secret, access_token, hashlib.sha256).hexdigest()
 
     def message(self, recipient: int, message: str) -> dict:
         message_body = {
