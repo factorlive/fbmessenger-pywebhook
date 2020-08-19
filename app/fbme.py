@@ -19,9 +19,9 @@ class Messenger(object):
             'recipient': {'id': recipient},
             'message': {'text': message}
         }
-        method = FBME_API_HOST + '/' + FBME_API_VERSION + '/me/messages'
+        gateway = FBME_API_HOST + '/' + FBME_API_VERSION + '/me/messages'
         access_token = f'?access_token={getenv("FB_PAGE_ACCESS_TOKEN")}'
-        response = requests.post(method + access_token, json=message_body).json()
+        response = requests.post(gateway + access_token, json=message_body).json()
         return response
 
     def check_header(self, header: dict) -> Optional[str]:
