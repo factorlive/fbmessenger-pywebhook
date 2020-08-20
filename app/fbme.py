@@ -38,9 +38,10 @@ class Messenger(object):
             'recipient': {'id': recipient},
             'message': {'text': message}
         }
-        gateway = FBME_API_HOST + '/' + FBME_API_VERSION +  str(recipient)  # '/me/messages'
+        gateway = FBME_API_HOST + '/' + FBME_API_VERSION + '/' + '/me/messages' # str(recipient)  # '/me/messages'
         # access_token = f'?access_token={getenv("FB_PAGE_ACCESS_TOKEN")}'
         params = self.sign(message_body)
+        params['recipient'] = recipient
         response = requests.post(gateway, params=params).json()
         logger.info(response)
         return response
