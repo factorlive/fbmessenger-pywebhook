@@ -16,11 +16,16 @@ FBME_API_VERSION = getenv('FBME_API_VERSION', 'fbme_api_version_missing')
 
 
 class Messenger(object):
+    def __init__(self):
+        self.session = requests.Session()
+        self.app_secret = getenv('FB_APP_SECRET', 'missing_secret')
+
     def credentials(self) -> str:
+        params = {}
         app_secret = getenv('FB_APP_SECRET', 'missing_secret').encode()
-        access_token = getenv(
+        params['access_token'] = getenv(
             'FB_PAGE_ACCESS_TOKEN', 'missing_page_access_token').encode()
-        appsecret_proof = hmac.new(app_secret, access_token, hashlib.sha256).hexdigest()
+        params['appsecret_proof'] = hmac.new(app_secret, access_token, hashlib.sha256).hexdigest()
         return (f'?access_token={getenv("FB_PAGE_ACCESS_TOKEN")}'
                 f'?appsecret_proof={appsecret_proof}')
 
@@ -31,7 +36,8 @@ class Messenger(object):
         }
         gateway = FBME_API_HOST + '/' + FBME_API_VERSION + '/me/messages'
         # access_token = f'?access_token={getenv("FB_PAGE_ACCESS_TOKEN")}'
-        response = requests.post(gateway + self.credentials(), json=message_body).json()
+        response = requests.post(gateway + self.credentials(), params=message_body).json()
+        logger.info(response)
         return response
 
     def check_header(self, header: dict) -> Optional[str]:
