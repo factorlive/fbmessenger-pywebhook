@@ -20,7 +20,7 @@ class Messenger(object):
         self.session = requests.Session()
         self.app_secret = getenv('FB_APP_SECRET', 'missing_secret')
 
-    def credentials(self, payload: dict) -> Dict[str, Any]:
+    def sign(self, payload: dict) -> dict:
         params = {}
         app_secret = getenv('FB_APP_SECRET', 'missing_secret').encode()
         access_token = getenv(
@@ -29,6 +29,7 @@ class Messenger(object):
             app_secret, access_token, hashlib.sha256).hexdigest()
         params['access_token'] = getenv(
             "FB_PAGE_ACCESS_TOKEN", 'missing_page_access_token')
+        # TODO check typing
         params['payload'] = payload
         return params
 
@@ -37,9 +38,10 @@ class Messenger(object):
             'recipient': {'id': recipient},
             'message': {'text': message}
         }
-        gateway = FBME_API_HOST + '/' + FBME_API_VERSION + '/me/messages'
+        gateway = FBME_API_HOST + '/' + FBME_API_VERSION +  str(recipient)  # '/me/messages'
         # access_token = f'?access_token={getenv("FB_PAGE_ACCESS_TOKEN")}'
-        response = requests.post(gateway + self.credentials(), params=message_body).json()
+        params = self.sign(message_body)
+        response = requests.post(gateway, params=params).json()
         logger.info(response)
         return response
 
