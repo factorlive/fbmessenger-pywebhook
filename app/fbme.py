@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Dict, Union, Optional, Any
 import hmac
 import hashlib
 from os import getenv, remove
@@ -20,14 +20,17 @@ class Messenger(object):
         self.session = requests.Session()
         self.app_secret = getenv('FB_APP_SECRET', 'missing_secret')
 
-    def credentials(self) -> str:
+    def credentials(self, payload: dict) -> Dict[str, Any]:
         params = {}
         app_secret = getenv('FB_APP_SECRET', 'missing_secret').encode()
-        params['access_token'] = getenv(
+        access_token = getenv(
             'FB_PAGE_ACCESS_TOKEN', 'missing_page_access_token').encode()
-        params['appsecret_proof'] = hmac.new(app_secret, access_token, hashlib.sha256).hexdigest()
-        return (f'?access_token={getenv("FB_PAGE_ACCESS_TOKEN")}'
-                f'?appsecret_proof={appsecret_proof}')
+        params['appsecret_proof'] = hmac.new(
+            app_secret, access_token, hashlib.sha256).hexdigest()
+        params['access_token'] = getenv(
+            "FB_PAGE_ACCESS_TOKEN", 'missing_page_access_token')
+        params['payload'] = payload
+        return params
 
     def message(self, recipient: int, message: str) -> dict:
         message_body = {
